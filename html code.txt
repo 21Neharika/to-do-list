@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #todo-list {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 8px;
+        }
+        button {
+            background-color: #0074D9;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="todo-list">
+        <h1>To-Do List</h1>
+        <ul>
+            <li>
+                <input type="checkbox">
+                <input type="text" value="Example task 1">
+                <button>Delete</button>
+            </li>
+            <li>
+                <input type="checkbox">
+                <input type="text" value="Example task 2">
+                <button>Delete</button>
+            </li>
+        </ul>
+        <div>
+            <input type="text" id="new-task" placeholder="Add a new task">
+            <button id="add-button">Add Task</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle adding new tasks and deleting tasks
+        document.getElementById("add-button").addEventListener("click", function () {
+            var newTaskText = document.getElementById("new-task").value;
+            if (newTaskText) {
+                var ul = document.querySelector("ul");
+                var li = document.createElement("li");
+                li.innerHTML = `
+                    <input type="checkbox">
+                    <input type="text" value="${newTaskText}">
+                    <button>Delete</button>
+                `;
+                ul.appendChild(li);
+                document.getElementById("new-task").value = "";
+            }
+        });
+
+        document.addEventListener("click", function (e) {
+            if (e.target && e.target.tagName === "BUTTON" && e.target.innerHTML === "Delete") {
+                e.target.parentElement.remove();
+            }
+        });
+    </script>
+</body>
+</html>
